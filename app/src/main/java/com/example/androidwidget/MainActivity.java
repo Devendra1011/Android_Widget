@@ -1,5 +1,6 @@
 package com.example.androidwidget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -41,7 +42,7 @@ Button btnDisSelDate;
         cbPizza = findViewById(R.id.cb_pizza);
         rgPizza = findViewById(R.id.rg_pizza);
         spinner = findViewById(R.id.spinner);
-        timePicker = findViewById(R.id.time_picker);
+//        timePicker = findViewById(R.id.time_picker);
         datePicker = findViewById(R.id.date_picker);
         btnDisSelDate = findViewById(R.id.btn_dis_sel_date);
 
@@ -76,13 +77,13 @@ Button btnDisSelDate;
             }
         });
 
-
+/*
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 Toast.makeText(MainActivity.this,"Hour: "+hourOfDay+"Minute: "+minute,Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
 
         btnDisSelDate.setOnClickListener(new View.OnClickListener() {
@@ -91,11 +92,14 @@ Button btnDisSelDate;
                 String day = "Day "+datePicker.getDayOfMonth();
                 String month = "Month "+datePicker.getMonth();
                 String year = "Year "+datePicker.getYear();
-
                 Toast.makeText(MainActivity.this, day+"\n"+month+"\n"+year, Toast.LENGTH_SHORT).show();
             }
         });
+    }
 
 
+    public void goToSecondActivity(){
+        Intent intent = new Intent(this, SecondActivity.class);
+        startActivity(intent);
     }
 }
