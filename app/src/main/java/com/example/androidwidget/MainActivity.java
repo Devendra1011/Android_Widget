@@ -1,12 +1,16 @@
 package com.example.androidwidget;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -19,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 CheckBox cbPizza;
 RadioGroup rgPizza;
 Spinner spinner;
+TimePicker timePicker;
+DatePicker datePicker;
+Button btnDisSelDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +41,10 @@ Spinner spinner;
         cbPizza = findViewById(R.id.cb_pizza);
         rgPizza = findViewById(R.id.rg_pizza);
         spinner = findViewById(R.id.spinner);
+        timePicker = findViewById(R.id.time_picker);
+        datePicker = findViewById(R.id.date_picker);
+        btnDisSelDate = findViewById(R.id.btn_dis_sel_date);
+
 
         // Data Source
         String[] item = {"Pickle","Lassi","Achar","Tikka"};
@@ -64,5 +75,27 @@ Spinner spinner;
                 Toast.makeText(MainActivity.this, "You selected"+radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
+            @Override
+            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
+                Toast.makeText(MainActivity.this,"Hour: "+hourOfDay+"Minute: "+minute,Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        btnDisSelDate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String day = "Day "+datePicker.getDayOfMonth();
+                String month = "Month "+datePicker.getMonth();
+                String year = "Year "+datePicker.getYear();
+
+                Toast.makeText(MainActivity.this, day+"\n"+month+"\n"+year, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 }
