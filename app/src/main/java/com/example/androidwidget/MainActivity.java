@@ -21,12 +21,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
-CheckBox cbPizza;
-RadioGroup rgPizza;
-Spinner spinner;
-TimePicker timePicker;
-DatePicker datePicker;
-Button btnDisSelDate;
+    CheckBox cbPizza;
+    RadioGroup rgPizza;
+    Spinner spinner;
+    Button btnGoToSecActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,18 +36,15 @@ Button btnDisSelDate;
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        
-        
+
+
         cbPizza = findViewById(R.id.cb_pizza);
         rgPizza = findViewById(R.id.rg_pizza);
+        btnGoToSecActivity = findViewById(R.id.btn_goto_sec_activity);
         spinner = findViewById(R.id.spinner);
-//        timePicker = findViewById(R.id.time_picker);
-        datePicker = findViewById(R.id.date_picker);
-        btnDisSelDate = findViewById(R.id.btn_dis_sel_date);
-
 
         // Data Source
-        String[] item = {"Pickle","Lassi","Achar","Tikka"};
+        String[] item = {"Pickle", "Lassi", "Achar", "Tikka"};
         // ArrayAdapter: used to populate the spinner with items from a string resource
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, item);
 
@@ -56,14 +52,12 @@ Button btnDisSelDate;
         spinner.setAdapter(adapter);
 
 
-
-
         cbPizza.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     Toast.makeText(MainActivity.this, "The Checked box is checked", Toast.LENGTH_SHORT).show();
-                }else {
+                } else {
                     Toast.makeText(MainActivity.this, "The Checked box is not checked", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -72,33 +66,21 @@ Button btnDisSelDate;
         rgPizza.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                RadioButton  radioButton = findViewById(checkedId);
-                Toast.makeText(MainActivity.this, "You selected"+radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
+                RadioButton radioButton = findViewById(checkedId);
+                Toast.makeText(MainActivity.this, "You selected" + radioButton.getText().toString(), Toast.LENGTH_SHORT).show();
             }
         });
 
-/*
-        timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
-            @Override
-            public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                Toast.makeText(MainActivity.this,"Hour: "+hourOfDay+"Minute: "+minute,Toast.LENGTH_SHORT).show();
-            }
-        });*/
-
-
-        btnDisSelDate.setOnClickListener(new View.OnClickListener() {
+        btnGoToSecActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String day = "Day "+datePicker.getDayOfMonth();
-                String month = "Month "+datePicker.getMonth();
-                String year = "Year "+datePicker.getYear();
-                Toast.makeText(MainActivity.this, day+"\n"+month+"\n"+year, Toast.LENGTH_SHORT).show();
+                goToSecondActivity();
             }
         });
+
     }
 
-
-    public void goToSecondActivity(){
+    public void goToSecondActivity() {
         Intent intent = new Intent(this, SecondActivity.class);
         startActivity(intent);
     }
